@@ -503,7 +503,7 @@ const cardData = [
     wickets: 152,
     bowlAvg: 29.67,
     bowlER: 7.6,
-    bestBowling: 23.34,
+    bestBowling: "5/16",
   },
   {
     name: "Deepak Chahar",
