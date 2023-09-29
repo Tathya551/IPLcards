@@ -58,11 +58,11 @@ const App = () => {
     const computerBestBowling = parseBestBowling(computerStat);
 
     if (!userBestBowling && !computerBestBowling) {
-      return 0; // It's a tie
+      return 0;
     } else if (!userBestBowling) {
-      return -1; // Computer wins
+      return -1;
     } else if (!computerBestBowling) {
-      return 1; // User wins
+      return 1;
     } else {
       if (userBestBowling.wickets > computerBestBowling.wickets) {
         return 1;
@@ -87,93 +87,71 @@ const App = () => {
     let userStat = userCards[0][stat];
     let computerStat = computerCards[0][stat];
 
+    let winner = "";
+
     if (stat === "bestBowling") {
       const comparison = compareBestBowling(userStat, computerStat);
       if (comparison === 1) {
-        setResultMessage(
-          `User wins! Computer's card was ${computerCards[0].name}. Selected stat: ${stat}`
-        );
+        winner = "User";
         setIsUserTurn(true);
         setCurrentStreak((prev) => prev + 1);
         setHighestStreak((prev) => Math.max(prev, currentStreak + 1));
       } else if (comparison === -1) {
-        setResultMessage(
-          `Computer wins! Computer's card was ${computerCards[0].name}. Selected stat: ${stat}`
-        );
+        winner = "Computer";
         setIsUserTurn(false);
         setCurrentStreak(0);
       } else {
-        setResultMessage(
-          `It's a tie! Computer's card was ${computerCards[0].name}. Selected stat: ${stat}`
-        );
+        winner = "Nobody";
         setCurrentStreak(0);
       }
     } else {
       if (isNaN(userStat) || isNaN(computerStat)) {
         if (isNaN(userStat) && isNaN(computerStat)) {
-          setResultMessage(
-            `It's a tie! Computer's card was ${computerCards[0].name}. Selected stat: ${stat}`
-          );
+          winner = "Nobody";
         } else if (isNaN(userStat)) {
-          setResultMessage(
-            `Computer wins! Computer's card was ${computerCards[0].name}. Selected stat: ${stat}`
-          );
+          winner = "Computer";
           setIsUserTurn(false);
           setCurrentStreak(0);
         } else {
-          setResultMessage(
-            `User wins! Computer's card was ${computerCards[0].name}. Selected stat: ${stat}`
-          );
+          winner = "User";
           setIsUserTurn(true);
           setCurrentStreak((prev) => prev + 1);
           setHighestStreak((prev) => Math.max(prev, currentStreak + 1));
         }
       } else if (stat === "bowlER" || stat === "bowlAvg") {
-        const computerCardName = computerCards[0].name;
-
         if (userStat < computerStat) {
-          setResultMessage(
-            `User wins! Computer's card was ${computerCardName}. Selected stat: ${stat}`
-          );
+          winner = "User";
           setIsUserTurn(true);
           setCurrentStreak((prev) => prev + 1);
           setHighestStreak((prev) => Math.max(prev, currentStreak + 1));
         } else if (userStat > computerStat) {
-          setResultMessage(
-            `Computer wins! Computer's card was ${computerCardName}. Selected stat: ${stat}`
-          );
+          winner = "Computer";
           setIsUserTurn(false);
           setCurrentStreak(0);
         } else {
-          setResultMessage(
-            `It's a tie! Computer's card was ${computerCardName}. Selected stat: ${stat}`
-          );
+          winner = "Nobody";
           setCurrentStreak(0);
         }
       } else {
-        const computerCardName = computerCards[0].name;
-
         if (userStat > computerStat) {
-          setResultMessage(
-            `User wins! Computer's card was ${computerCardName}. Selected stat: ${stat}`
-          );
+          winner = "User";
           setIsUserTurn(true);
           setCurrentStreak((prev) => prev + 1);
           setHighestStreak((prev) => Math.max(prev, currentStreak + 1));
         } else if (userStat < computerStat) {
-          setResultMessage(
-            `Computer wins! Computer's card was ${computerCardName}. Selected stat: ${stat}`
-          );
+          winner = "Computer";
           setIsUserTurn(false);
           setCurrentStreak(0);
         } else {
-          setResultMessage(
-            `It's a tie! Computer's card was ${computerCardName}. Selected stat: ${stat}`
-          );
+          winner = "Nobody";
           setCurrentStreak(0);
         }
       }
     }
+
+    setResultMessage(
+      `${winner} wins! ${userCards[0].name}'s ${stat} is ${userStat} and ${computerCards[0].name}'s ${stat} is ${computerStat}`
+    );
     const newUserCards = [...userCards.slice(1)];
     const newComputerCards = [...computerCards.slice(1)];
     if (stat === "bestBowling") {
@@ -223,12 +201,51 @@ const App = () => {
     }
   };
 
+  const sortedRuns = cardData.map((card) => card.runs).sort((a, b) => b - a);
+  const sortedBatAvg = cardData
+    .map((card) => card.batAvg)
+    .sort((a, b) => b - a);
+  const sortedBowlAvg = cardData
+    .map((card) => card.bowlAvg)
+    .sort((a, b) => a - b);
+  const sortedHighScore = cardData
+    .map((card) => card.highScore)
+    .sort((a, b) => b - a);
+
+  const sortedBatSR = cardData.map((card) => card.batSR).sort((a, b) => b - a);
+  const sortedWickets = cardData
+    .map((card) => card.wickets)
+    .sort((a, b) => b - a);
+  const sortedBowlER = cardData
+    .map((card) => card.bowlER)
+    .sort((a, b) => a - b);
+
   const handleComputerTurn = () => {
-    const statKeys = Object.keys(computerCards[0]).filter(
-      (key) => key !== "name" && key !== "team"
-    );
-    const randomStat = statKeys[Math.floor(Math.random() * statKeys.length)];
-    handleStatSelect(randomStat);
+    const statRanks = {
+      runs: sortedRuns.indexOf(computerCards[0].runs),
+      batAvg: sortedBatAvg.indexOf(computerCards[0].batAvg),
+      bowlAvg: isNaN(computerCards[0].bowlAvg)
+        ? cardData.length + 1
+        : sortedBowlAvg.indexOf(computerCards[0].bowlAvg),
+      highScore: sortedHighScore.indexOf(computerCards[0].highScore),
+      batSR: sortedBatSR.indexOf(computerCards[0].batSR),
+      wickets: sortedWickets.indexOf(computerCards[0].wickets),
+      bowlER: isNaN(computerCards[0].bowlER)
+        ? cardData.length + 1
+        : sortedBowlER.indexOf(computerCards[0].bowlER),
+    };
+
+    let selectedStat = null;
+    let lowestRank = Infinity;
+
+    for (const stat in statRanks) {
+      if (statRanks[stat] < lowestRank) {
+        lowestRank = statRanks[stat];
+        selectedStat = stat;
+      }
+    }
+
+    handleStatSelect(selectedStat);
   };
 
   const handleContinue = () => {
