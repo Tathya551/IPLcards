@@ -479,7 +479,7 @@ const cardData = [
     wickets: 8,
     bowlAvg: 38.63,
     bowlER: 9.97,
-    bestBowling: 23.25,
+    bestBowling: '3/27',
   },
   {
     name: "MS Dhoni",
