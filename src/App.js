@@ -22,7 +22,11 @@ const App = () => {
   const [gameEnded, setGameEnded] = useState(false);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [highestStreak, setHighestStreak] = useState(0);
+<<<<<<< HEAD
   const [selectedCardCount, setSelectedCardCount] = useState(cardData.length);
+=======
+  const [selectedCardCount, setSelectedCardCount] = useState(50);
+>>>>>>> 608da71fd07a90f88c1dc0a4276b9a0cf8ff3d27
 
   const distributeCards = () => {
     const shuffledCards = shuffleArray(cardData).slice(0, selectedCardCount);
