@@ -22,7 +22,7 @@ const App = () => {
   const [gameEnded, setGameEnded] = useState(false);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [highestStreak, setHighestStreak] = useState(0);
-  const [selectedCardCount, setSelectedCardCount] = useState(10);
+  const [selectedCardCount, setSelectedCardCount] = useState(cardData.length);
 
   const distributeCards = () => {
     const shuffledCards = shuffleArray(cardData).slice(0, selectedCardCount);
@@ -150,8 +150,17 @@ const App = () => {
     }
 
     setResultMessage(
-      `${winner} wins! ${userCards[0].name}'s ${stat} is ${userStat} and ${computerCards[0].name}'s ${stat} is ${computerStat}`
+      <>
+        {stat}:
+        <br />
+        <br />
+        {userCards[0].name.toUpperCase()} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp; {computerCards[0].name.toUpperCase()} <br />
+        {userStat} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+        {computerStat}
+      </>
     );
+
     const newUserCards = [...userCards.slice(1)];
     const newComputerCards = [...computerCards.slice(1)];
     if (stat === "bestBowling") {
@@ -235,15 +244,11 @@ const App = () => {
         : sortedBowlER.indexOf(computerCards[0].bowlER),
     };
 
-    let selectedStat = null;
-    let lowestRank = Infinity;
+    let topThreeStats = Object.keys(statRanks)
+      .sort((a, b) => statRanks[a] - statRanks[b])
+      .slice(0, 2);
 
-    for (const stat in statRanks) {
-      if (statRanks[stat] < lowestRank) {
-        lowestRank = statRanks[stat];
-        selectedStat = stat;
-      }
-    }
+    let selectedStat = topThreeStats[Math.floor(Math.random() * 2)];
 
     handleStatSelect(selectedStat);
   };
@@ -279,8 +284,28 @@ const App = () => {
 
   return (
     <ChakraProvider>
-      <Box textAlign="center" p="10">
-        <h1>Cricket Cards Game</h1>
+      <Box
+        textAlign="center"
+        p="10"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),url('https://media.istockphoto.com/id/802008002/video/5-days-test-cricket-match-playing-between-two-team-in-a-stadium-at-night-with-flood-light.jpg?s=640x640&k=20&c=NPTl5x9BD19uDlZYRNKgE3KdAjPhVfNmUpNGAbMnkxo=')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "36px",
+            marginTop: "-5px",
+            color: "darkblue",
+            textShadow: "1px 1px 2px white",
+
+            fontWeight: "bold",
+          }}
+        >
+          IPL CARDS GAME
+        </h1>
         {!gameStarted && (
           <Flex justify="center" align="center">
             <Select
@@ -301,45 +326,97 @@ const App = () => {
           </Flex>
         )}
         {gameStarted && (
-          <Flex justify="space-between">
+          <Flex justify="center" mb={4}>
             <Card
               card={userCards[0]}
               hidden={false}
               onStatSelect={handleStatSelect}
               isUserTurn={isUserTurn}
               gameEnded={gameEnded}
+              isUserCard={true}
             />
-            <Card card={computerCards[0]} hidden={true} />
+            <div
+              style={{ margin: "0 16px", alignSelf: "center", height: "80px" }}
+            >
+              {resultMessage && (
+                <div
+                  style={{
+                    position: "relative",
+                    top: "-20px",
+                    fontSize: "27.98px",
+                    color: "darkblue",
+                    textShadow: "1px 1px 2px white",
+
+                    fontWeight: "bold",
+                  }}
+                >
+                  {resultMessage}
+                </div>
+              )}
+              {gameStarted && (
+                <div
+                  style={{
+                    marginTop: "50px",
+                    color: "darkblue",
+                    textShadow: "1px 1px 2px white",
+
+                    fontWeight: "bold",
+                    fontSize: "23px",
+                  }}
+                >
+                  {isUserTurn ? "User's Turn" : "Computer's Turn"}
+                  <div>Current Streak: {currentStreak}</div>
+                  <div>Highest Streak: {highestStreak}</div>
+                </div>
+              )}
+              {gameStarted && !isUserTurn && (
+                <Button
+                  id="continue-button"
+                  onClick={handleContinue}
+                  disabled={resultMessage.length > 0}
+                >
+                  Continue
+                </Button>
+              )}
+              {gameEnded && <Button onClick={restartGame}>Restart Game</Button>}
+              {gameEnded &&
+                (userCards.length === 0 || computerCards.length === 0) && (
+                  <div>
+                    {userCards.length === 0 ? "Computer Wins!" : "User Wins!"}
+                  </div>
+                )}
+            </div>
+            <Card card={computerCards[0]} hidden={true} isUserCard={false} />
           </Flex>
         )}
-        {resultMessage && <div>{resultMessage}</div>}
         {gameStarted && (
-          <div>
-            {isUserTurn ? "User's Turn" : "Computer's Turn"}
-            <div>Current Streak: {currentStreak}</div>
-            <div>Highest Streak: {highestStreak}</div>
-          </div>
-        )}
-        {gameStarted && !isUserTurn && (
-          <Button
-            id="continue-button"
-            onClick={handleContinue}
-            disabled={resultMessage.length > 0}
-          >
-            Continue
-          </Button>
-        )}
-        {gameEnded && <Button onClick={restartGame}>Restart Game</Button>}
-        {gameEnded &&
-          (userCards.length === 0 || computerCards.length === 0) && (
-            <div>
-              {userCards.length === 0 ? "Computer Wins!" : "User Wins!"}
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div
+              style={{
+                fontSize: "29px",
+                marginTop: "29px",
+                marginLeft: "30px",
+                color: "darkblue",
+                textShadow: "1px 1px 2px white",
+
+                fontWeight: "bold",
+              }}
+            >
+              CARDS REMAINING - {userCards.length}
             </div>
-          )}
-        {gameStarted && (
-          <div>
-            Cards Remaining: User - {userCards.length}, Computer -{" "}
-            {computerCards.length}
+            <div
+              style={{
+                fontSize: "29px",
+                marginTop: "29px",
+                marginRight: "30px",
+                color: "darkblue",
+                textShadow: "1px 1px 2px white",
+
+                fontWeight: "bold",
+              }}
+            >
+              CARDS REMAINING - {computerCards.length}
+            </div>
           </div>
         )}
       </Box>
