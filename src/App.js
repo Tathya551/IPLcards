@@ -12,6 +12,52 @@ const shuffleArray = (array) => {
   return shuffledArray;
 };
 
+const Instructions = () => {
+  return (
+    <Box
+      p="4"
+      mb="4"
+      bg=""
+      borderRadius="md"
+      boxShadow="md"
+      textAlign="left"
+      color="darkblue"
+      textShadow="1px 1px 2px white"
+      fontWeight="bold"
+    >
+      <h2 style={{ fontSize: "24px", marginBottom: "10px" }}>Instructions:</h2>
+      <ul style={{ paddingLeft: "20px" }}>
+        <li>
+          This is a cricket cards game, similar to what we used to play in
+          childhood.
+        </li>
+        <li>Here, you'll play against the computer.</li>
+        <li>
+          Select the number of cards you want to play with, and then start the
+          game.
+        </li>
+        <li>
+          The cards will be distributed evenly, and it will be your turn to
+          choose a stat.
+        </li>
+        <li>Each card has 8 stats based on the cricketers' IPL careers.</li>
+        <li>
+          If the stat you choose is better than the computer's, you win the
+          round, otherwise, the computer wins.
+        </li>
+        <li>The winner of the round gets the opponent's card.</li>
+        <li>
+          The player who acquires all of the opponent's cards wins the game.
+        </li>
+        <li>
+          Use your cricket knowledge to choose the most probable winning stat
+          and relive childhood memories!
+        </li>
+      </ul>
+    </Box>
+  );
+};
+
 const App = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [userCards, setUserCards] = useState([]);
@@ -22,7 +68,6 @@ const App = () => {
   const [gameEnded, setGameEnded] = useState(false);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [highestStreak, setHighestStreak] = useState(0);
-
   const [selectedCardCount, setSelectedCardCount] = useState(cardData.length);
 
   const distributeCards = () => {
@@ -325,6 +370,11 @@ const App = () => {
               Start Game
             </Button>
           </Flex>
+        )}
+        {!gameStarted && (
+          <Box mt={4} p={4} bg="rgba(255, 255, 255, 0.8)" borderRadius="lg">
+            <Instructions />
+          </Box>
         )}
         {gameStarted && (
           <Flex justify="center" mb={4}>
