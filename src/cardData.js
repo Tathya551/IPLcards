@@ -2,7 +2,7 @@ const cardData = [
   {
     name: "Virat Kohli",
     team: "RCB",
-    img: "https://gumlet.assettype.com/dtnext/2023-05/fcc02cbb-bc7b-4b4f-8846-fcebe4253af0/xfgggguuuujjjaaratlion1.jpg",
+    img: "https://dtnext-prod.s3.ap-south-1.amazonaws.com/imported/2023-05/959871db-1e2c-48ff-af1c-07fa55780550/Untitled_design__7_.jpg",
 
     runs: 7263,
     batAvg: 37.25,
