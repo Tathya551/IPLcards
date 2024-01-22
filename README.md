@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Cricket Cards Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+The Cricket Cards Game is an interactive web application inspired by the concept of sports trading cards games. In this game, players engage in rounds of card comparisons based on cricket player statistics. The current version of the game is designed for single-player gameplay against a computer opponent.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Start Game**: Users can initiate a game which randomly distributes a set of cricket player cards between the user and the computer.
+- **Gameplay**: In each round, the player views the top card of their stack and selects a cricket stat for comparison against the computer's top card.
+- **Stat Comparison**: Stats such as runs, batting average, strike rate, wickets, etc., are compared, and the winner of the round takes the opponent's card.
+- **Winning Condition**: The game continues until one player acquires all cards.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **ReactJS**: The frontend is built using ReactJS, offering a dynamic and responsive user interface.
+- **Chakra UI**: The application uses Chakra UI for styling components and layouts.
 
-### `npm test`
+## Installation and Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
+   git clone <repository-url>
 
-### `npm run build`
+2. Install dependencies:
+   npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Run the application:
+   npm start
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Future Scope
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Multiplayer Support**: Plans to extend the game to support multiplayer mode, allowing users to play with friends in real-time.
+- **Backend Integration**:
+- Development of a Node.js/Express backend.
+- Integration with Socket.IO for real-time gameplay and player interaction.
+- **Player Profiles and Statistics**: Implementation of user profiles to track individual player stats and history.
+- **Enhanced Game Logic**: Refinement of the game's rules and mechanics for a more engaging multiplayer experience.
+- **Security and Performance Optimizations**: Ensuring the game's backend is secure and performs efficiently under different loads.
