@@ -1,0 +1,88 @@
+﻿body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.cricket-background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #bfe6ff;
+}
+
+.pitch {
+  position: absolute;
+  background-color: #8b572a;
+  width: 60%;
+  height: 100px;
+  left: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.stumps {
+  position: absolute;
+  background-color: #8b572a;
+  width: 2px;
+  height: 60px;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.batsman {
+  position: absolute;
+  background-color: #3b5998;
+  width: 30px;
+  height: 100px;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+}
