@@ -69,7 +69,7 @@ Open your browser to `http://localhost:3000`.
 
 ## Live Demo
 
-Try it online: [https://iplcards.vercel.app](https://iplcards.vercel.app)
+Try it online: [https://iplcards-production.up.railway.app/](https://iplcards-production.up.railway.app/)
 
 ## Technologies Used
 
